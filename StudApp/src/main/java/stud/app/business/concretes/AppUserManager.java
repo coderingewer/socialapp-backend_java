@@ -31,7 +31,7 @@ public class AppUserManager implements AppUserService {
 
 	@Override
 	public Result add(AppUser appUser) {
-		if (userValidService.validInfo(appUser.getPaswword(), appUser.getEmail())) {
+		if (userValidService.validInfo(appUser.getPassword(), appUser.getEmail())) {
 
 			this.userDao.save(appUser);
 			return new SuccessResult("added");
@@ -47,10 +47,10 @@ public class AppUserManager implements AppUserService {
 	}
 
 	@Override
-	public Result deleteById(int id,String password) {
+	public Result deleteById(int id, String password) {
 
 		AppUser deleteUser = this.userDao.getById(id);
-		if (password == deleteUser.getPaswword()) {
+		if (password == deleteUser.getPassword()) {
 			this.userDao.deleteById(id);
 			return new SuccessResult("deleted");
 		} else {
@@ -70,14 +70,12 @@ public class AppUserManager implements AppUserService {
 
 	@Override
 	public DataResult<List<AppUser>> getByAsc(Sort sort) {
-		return new SuccessDataResult<List<AppUser>>(
-				this.userDao.findAll(Sort.by(Sort.Direction.ASC, "id")));
+		return new SuccessDataResult<List<AppUser>>(this.userDao.findAll(Sort.by(Sort.Direction.ASC, "id")));
 	}
 
 	@Override
 	public DataResult<List<AppUser>> getByDesc(Sort sort) {
-		return new SuccessDataResult<List<AppUser>>(
-				this.userDao.findAll(Sort.by(Sort.Direction.DESC, "id")));
+		return new SuccessDataResult<List<AppUser>>(this.userDao.findAll(Sort.by(Sort.Direction.DESC, "id")));
 	}
 
 }

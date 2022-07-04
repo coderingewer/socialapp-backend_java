@@ -36,11 +36,7 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	@Size(min = 11, max = 13)
-	@Column(name = "phone_number")
-	private String phoneNumer;
-
 	@Size(min = 6, max = 100)
 	@Column(name = "password")
-	private String paswword;
+	private String password;
 }
